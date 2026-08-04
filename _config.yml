@@ -23,14 +23,14 @@ repository               : "lyy1262252939-lgtm/lyy1262252939-lgtm.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "profile_YiayangLiu.png"
   name             : "Yiyang Liu"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
-  location         : "Earth"
-  employer         : "Red Brick University"
-  uri              : # URL
-  email            : "none@example.org" 
+  bio              : "M.Eng. student in Control Science and Engineering, focusing on robotic servo control, predictive control, and state estimation."
+  location         : "Shenzhen, China"
+  employer         : "Shenzhen University"
+  uri              :
+  email            : "2400092016@mails.szu.edu.cn"
 
   # Academic websites
   academia         : # URL
