@@ -5,14 +5,15 @@ published: true
 category: conferences
 permalink: /publication/2025-hofa-strict-feedback-lsrm/
 year: 2025
-venue: "Proc. 4th Conf. Fully Actuated Syst. Theory Appl. (FASTA)"
+venue: "Proceedings of the 4th Conference on Fully Actuated System Theory and Applications (FASTA)"
 details: "pp. 262–267"
 status: "Published in IEEE Xplore"
 authors: "Yiting Ma, Yiyang Liu, Yucheng Wang, et al."
+link: "https://doi.org/10.1109/FASTA65681.2025.11138879"
 ---
 
 **Authors:** Yiting Ma, **Yiyang Liu**, Yucheng Wang, et al.
 
-**Conference:** *Proc. 4th Conf. Fully Actuated Syst. Theory Appl. (FASTA)*
+**Conference:** *Proceedings of the 4th Conference on Fully Actuated System Theory and Applications (FASTA)*
 
 **Publication details:** pp. 262–267, 2025. Published in IEEE Xplore.
