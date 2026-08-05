@@ -209,6 +209,8 @@ textarea:focus-visible,
 
 .greedy-nav {
   min-width: 0;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
 }
 
 .greedy-nav a {
@@ -222,7 +224,6 @@ textarea:focus-visible,
 }
 
 .greedy-nav .visible-links > li:first-child a {
-  margin-left: 0.75rem;
   color: var(--academic-primary);
   font-size: 1.06rem;
   font-weight: 750;
