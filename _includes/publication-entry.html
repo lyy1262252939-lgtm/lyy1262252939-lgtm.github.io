@@ -1,35 +1,63 @@
 {% include base_path %}
 {% assign publication = include.post %}
 {% assign publication_title = publication.title | markdownify | remove: "<p>" | remove: "</p>" %}
-{% assign author_name = site.author.name | escape %}
-{% capture highlighted_author %}<strong class="author-self">{{ author_name }}</strong>{% endcapture %}
+{% assign author_aliases = site.publication_author_aliases %}
+{% if author_aliases == nil %}
+  {% assign author_aliases = site.author.name | split: "||" %}
+{% endif %}
+{% assign schema_type = "ScholarlyArticle" %}
+{% if publication.category == "patents" %}
+  {% assign schema_type = "CreativeWork" %}
+{% endif %}
 
-<article class="publication-entry" itemscope itemtype="https://schema.org/ScholarlyArticle">
-  <h3 class="publication-entry__title" itemprop="headline">
+<article class="publication-entry" itemscope itemtype="https://schema.org/{{ schema_type }}">
+  <h3 class="publication-entry__title" itemprop="headline"{% if publication.title_language %} lang="{{ publication.title_language | escape }}"{% endif %}>
     <a href="{{ base_path }}{{ publication.url }}">{{ publication_title }}</a>
   </h3>
 
   {% if publication.authors %}
+    {% assign rendered_authors = publication.authors | escape %}
+    {% for alias in author_aliases %}
+      {% assign escaped_alias = alias | escape %}
+      {% capture highlighted_alias %}<strong class="author-self">{{ escaped_alias }}</strong>{% endcapture %}
+      {% assign rendered_authors = rendered_authors | replace: escaped_alias, highlighted_alias %}
+    {% endfor %}
     <p class="publication-entry__authors" itemprop="author">
-      {{ publication.authors | escape | replace: author_name, highlighted_author }}
+      {{ rendered_authors }}
     </p>
   {% elsif publication.citation %}
+    {% assign rendered_citation = publication.citation %}
+    {% for alias in author_aliases %}
+      {% assign escaped_alias = alias | escape %}
+      {% capture highlighted_alias %}<strong class="author-self">{{ escaped_alias }}</strong>{% endcapture %}
+      {% assign rendered_citation = rendered_citation | replace: escaped_alias, highlighted_alias %}
+    {% endfor %}
     <p class="publication-entry__authors">
-      {{ publication.citation | replace: site.author.name, highlighted_author }}
+      {{ rendered_citation }}
     </p>
   {% endif %}
 
-  {% if publication.venue or publication.date %}
+  {% if publication.english_title %}
+    <p class="publication-entry__details">
+      Unofficial English translation: <em>{{ publication.english_title | escape }}</em>
+    </p>
+  {% endif %}
+
+  {% if publication.venue or publication.details or publication.year or publication.date %}
     <p class="publication-entry__venue">
       {% if publication.venue %}<em>{{ publication.venue }}</em>{% endif %}
-      {% if publication.venue and publication.date %}<span aria-hidden="true"> · </span>{% endif %}
-      {% if publication.date %}<time datetime="{{ publication.date | date_to_xmlschema }}">{{ publication.date | date: "%Y" }}</time>{% endif %}
+      {% if publication.details %}{% if publication.venue %}<span aria-hidden="true"> &middot; </span>{% endif %}{{ publication.details | escape }}{% endif %}
+      {% if publication.year %}{% if publication.venue or publication.details %}<span aria-hidden="true"> &middot; </span>{% endif %}<time datetime="{{ publication.year }}" itemprop="datePublished">{{ publication.year }}</time>{% elsif publication.date %}{% if publication.venue or publication.details %}<span aria-hidden="true"> &middot; </span>{% endif %}<time datetime="{{ publication.date | date_to_xmlschema }}" itemprop="datePublished">{{ publication.date | date: "%Y" }}</time>{% endif %}
     </p>
   {% endif %}
 
-  {% if publication.excerpt %}
+  {% if publication.status %}
+    <p class="publication-entry__status"><span class="sr-only">Publication status: </span>{{ publication.status | escape }}</p>
+  {% endif %}
+
+  {% if publication.summary %}
     <div class="publication-entry__excerpt" itemprop="description">
-      {{ publication.excerpt | markdownify }}
+      {{ publication.summary | markdownify }}
     </div>
   {% endif %}
 

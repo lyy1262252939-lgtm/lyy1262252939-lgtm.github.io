@@ -90,6 +90,13 @@ publication_category:
     title: 'Conference Papers'
   manuscripts:
     title: 'Manuscripts'
+  patents:
+    title: 'Patents'
+
+# Names highlighted in publication and patent author lists.
+publication_author_aliases:
+  - "Yiyang Liu"
+  - "刘易旸"
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/ for social media previews

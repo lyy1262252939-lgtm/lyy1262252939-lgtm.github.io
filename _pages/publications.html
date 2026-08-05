@@ -9,7 +9,7 @@ nav_section: publications
 {% include base_path %}
 
 <div class="publication-intro">
-  <p>My research has been published in <em>International Journal of Systems Science</em> and <em>Aerospace Science and Technology</em>, with additional work submitted to <em>IEEE Transactions on Industrial Electronics</em>.</p>
+  <p>My work covers predictive control, high-order fully actuated systems, motor drives, and quadrotor attitude tracking. The records below include journal articles, conference papers, a submitted manuscript, and a Chinese invention patent application.</p>
   {% if site.author.googlescholar %}
     <a class="btn btn--primary" href="{{ site.author.googlescholar }}">
       <i class="ai ai-google-scholar" aria-hidden="true"></i>
@@ -23,7 +23,7 @@ nav_section: publications
   {% for category in site.publication_category %}
     {% assign category_posts = site.publications | where: "category", category[0] %}
     {% if category_posts.size > 0 %}
-      {% assign sorted_posts = category_posts | sort: "date" | reverse %}
+      {% assign sorted_posts = category_posts | sort: "year" | reverse %}
       <section class="publication-section" aria-labelledby="publication-{{ category[0] }}">
         <h2 id="publication-{{ category[0] }}">{{ category[1].title }}</h2>
         <div class="publication-list">

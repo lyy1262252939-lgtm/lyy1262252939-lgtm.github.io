@@ -1,16 +1,20 @@
 ---
 layout: archive
-title: "Talks"
+title: "Talks & Academic Activities"
 permalink: /talks/
 author_profile: true
 nav_section: talks
 ---
 
-{% assign visible_talks = site.talks | where_exp: "talk", "talk.published != false" %}
+<p class="page__lead">Selected conference presentations and academic activities, listed from newest to oldest.</p>
+
+{% assign visible_talks = site.talks | where_exp: "talk", "talk.published != false" | sort: "date" | reverse %}
 {% if visible_talks.size > 0 %}
-  {% for post in visible_talks reversed %}
-    {% include archive-single-talk.html %}
-  {% endfor %}
+  <ol class="talk-list" aria-label="Conference presentations and academic activities">
+    {% for post in visible_talks %}
+      {% include archive-single-talk.html %}
+    {% endfor %}
+  </ol>
 {% else %}
   <section class="empty-state" aria-labelledby="talks-empty-title">
     <h2 id="talks-empty-title">Talks and presentations</h2>

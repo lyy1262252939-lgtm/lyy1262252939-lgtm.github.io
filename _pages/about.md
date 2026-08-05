@@ -12,7 +12,7 @@ redirect_from:
   <p class="profile-intro__eyebrow">M.Eng. Student · Control Science and Engineering</p>
   <h2 id="profile-intro-title">High-precision control for robotic and autonomous systems</h2>
   <p class="profile-intro__lead">My research centers on high-precision robotic servo control, predictive control, and state estimation, with particular interests in motor drives, learning-enhanced control, and active vibration suppression.</p>
-  <p>I am an M.Eng. student at <strong>Shenzhen University</strong>, supervised by <strong>Prof. Li Qiu</strong>. I received my B.Eng. in Electrical Engineering and Intelligent Control from Dongguan University of Technology. At Shenzhen University, I have a GPA of <strong>3.56/4.00</strong> and rank <strong>1st among 21 students</strong> in my program.</p>
+  <p>I am an M.Eng. student at <strong>Shenzhen University</strong>, supervised by <strong>Prof. Li Qiu</strong>, and expect to complete my degree in June 2027. I received my B.Eng. in Electrical Engineering and Intelligent Control from Dongguan University of Technology. At Shenzhen University, I have a GPA of <strong>3.56/4.00</strong> and rank <strong>1st among 21 students</strong> in my program.</p>
 
   <ul class="research-tags" aria-label="Core research areas">
     <li>Robotic Servo Control</li>
@@ -22,9 +22,9 @@ redirect_from:
   </ul>
 
   <div class="profile-actions" aria-label="Academic profile links">
-    <a class="btn btn--primary" href="https://scholar.google.com/citations?user=MZWddTgAAAAJ">Google Scholar</a>
+    {% if site.author.googlescholar %}<a class="btn btn--primary" href="{{ site.author.googlescholar }}">Google Scholar</a>{% endif %}
     <a class="btn btn--inverse" href="{{ '/cv/' | relative_url }}">View CV</a>
-    <a class="btn btn--inverse" href="mailto:2400092016@mails.szu.edu.cn">Email</a>
+    {% if site.author.email %}<a class="btn btn--inverse" href="mailto:{{ site.author.email }}">Email</a>{% endif %}
   </div>
 </section>
 
@@ -56,8 +56,9 @@ redirect_from:
   <li>Conducted motor–load modeling, parameter identification, embedded implementation, and experimental validation on the TI C2000 F28379D platform.</li>
   <li>Developed predictive observer-compensated high-order fully actuated control methods for linear switched reluctance machines.</li>
   <li>Participated in the development of an online-optimized predictive attitude-control framework and an autonomous quadrotor platform using PX4, ROS, MAVROS, RflySim, EGO-Planner, depth cameras, and LiDAR.</li>
-  <li>Published research in the <em>International Journal of Systems Science</em> and <em>Aerospace Science and Technology</em>, with additional work submitted to <em>IEEE Transactions on Industrial Electronics</em>.</li>
-  <li>Received the National First Prize in the simulation track and the National Third Prize in the real-system track of the 2025 CICC Embodied Intelligence Algorithm Challenge.</li>
+  <li>Published two journal articles in the <em>International Journal of Systems Science</em> and <em>Aerospace Science and Technology</em>, and two IEEE conference papers at FASTA 2025; additional work has been submitted to <em>IEEE Transactions on Industrial Electronics</em>.</li>
+  <li>Contribute as a core member to projects supported by the National Natural Science Foundation of China, the Natural Science Foundation of Guangdong Province, and the Shenzhen Basic Research Program.</li>
+  <li>Received First Prize in the online simulation competition and Third Prize in the on-site real-system competition of the inaugural CICC Unmanned Systems Embodied Intelligence Algorithm Challenge in 2025.</li>
 </ul>
 
 ## Education
@@ -66,7 +67,7 @@ redirect_from:
   <article class="education-item">
     <h3>Shenzhen University</h3>
     <p><strong>M.Eng. in Control Science and Engineering</strong></p>
-    <p>Sep. 2024 – Present · GPA: 3.56/4.00 · Rank: 1/21</p>
+    <p>Sep. 2024 – Expected Jun. 2027 · GPA: 3.56/4.00 · Rank: 1/21</p>
   </article>
   <article class="education-item">
     <h3>Dongguan University of Technology</h3>

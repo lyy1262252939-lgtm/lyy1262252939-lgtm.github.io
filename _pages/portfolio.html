@@ -7,35 +7,67 @@ nav_section: research
 ---
 
 <section class="profile-intro" aria-labelledby="research-intro-title">
-  <p class="profile-intro__eyebrow">Selected research</p>
+  <p class="profile-intro__eyebrow">Research portfolio</p>
   <h2 id="research-intro-title">Control, estimation, and autonomous systems</h2>
-  <p class="profile-intro__lead">My work spans high-precision robotic joint servo systems, predictive motor control, and autonomous aerial vehicles. The projects below are limited to research described in this site’s verified profile.</p>
+  <p class="profile-intro__lead">My work spans high-precision robotic joint servo systems, predictive motor control, and autonomous aerial vehicles. The projects below are drawn from my verified research experience and funded-project participation.</p>
 </section>
 
 {% assign research_projects = site.portfolio | where_exp: "project", "project.published != false" %}
 {% if research_projects.size > 0 %}
-  <div class="research-grid">
-    {% for project in research_projects %}
-      <article class="research-card">
-        {% if project.period %}
-          <p class="research-card__meta">{{ project.period | escape }}</p>
-        {% endif %}
-        <h2>{{ project.title | escape }}</h2>
-        <p>{{ project.summary | escape }}</p>
-        {% if project.keywords and project.keywords.size > 0 %}
-          <ul class="research-card__keywords" aria-label="Keywords for {{ project.title | escape }}">
-            {% for keyword in project.keywords %}
-              <li>{{ keyword | escape }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      </article>
-    {% endfor %}
-  </div>
+  {% assign research_groups = "selected-research,funded-project" | split: "," %}
+  {% for research_group in research_groups %}
+    {% assign grouped_projects = research_projects | where: "group", research_group | sort: "order" %}
+    {% if grouped_projects.size > 0 %}
+      {% case research_group %}
+        {% when "selected-research" %}
+          {% assign section_title = "Selected Research" %}
+          {% assign section_intro = "Research platforms and control methods developed through my master's research." %}
+        {% when "funded-project" %}
+          {% assign section_title = "Funded Projects" %}
+          {% assign section_intro = "Research programs in which I participate as a core member." %}
+      {% endcase %}
+
+      <section class="research-section" aria-labelledby="{{ research_group }}-title">
+        <header class="research-section__heading">
+          <h2 id="{{ research_group }}-title">{{ section_title }}</h2>
+          <p>{{ section_intro }}</p>
+        </header>
+
+        <div class="research-grid">
+          {% for project in grouped_projects %}
+            {% assign project_heading_id = research_group | append: "-project-" | append: forloop.index %}
+            <article class="research-card" aria-labelledby="{{ project_heading_id }}">
+              {% if project.role or project.period %}
+                <p class="research-card__meta">
+                  {% if project.role %}<span class="research-card__meta-item">{{ project.role | escape }}</span>{% endif %}
+                  {% if project.role and project.period %}<span aria-hidden="true"> &middot; </span>{% endif %}
+                  {% if project.period %}<span class="research-card__meta-item">{{ project.period | escape }}</span>{% endif %}
+                </p>
+              {% endif %}
+              <h3 id="{{ project_heading_id }}"{% if research_group == "funded-project" %} lang="zh-CN"{% endif %}>{{ project.title | escape }}</h3>
+              {% if project.descriptor %}
+                <p class="research-card__descriptor">{{ project.descriptor | escape }}</p>
+              {% endif %}
+              {% if project.funding %}
+                <p><strong>Funding:</strong> {{ project.funding | escape }}{% if project.grant_number %} &middot; Grant No. {{ project.grant_number | escape }}{% endif %}</p>
+              {% endif %}
+              <p>{{ project.summary | escape }}</p>
+              {% if project.keywords and project.keywords.size > 0 %}
+                <ul class="research-card__keywords" aria-label="Keywords for {{ project.title | escape }}">
+                  {% for keyword in project.keywords %}
+                    <li>{{ keyword | escape }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+  {% endfor %}
 {% else %}
   <section class="empty-state" aria-labelledby="research-empty-title">
     <h2 id="research-empty-title">Research projects</h2>
     <p>Verified project details will be added here when available.</p>
   </section>
 {% endif %}
-

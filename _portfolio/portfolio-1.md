@@ -1,16 +1,21 @@
 ---
-title: "High-Precision PMSM Robotic Joint Servo Control"
+title: "Predictive Control and State Estimation for Robotic Joint Servo Systems"
 collection: portfolio
-summary: "Predictive control and state estimation for PMSM-based robotic joint servo systems under measurement noise, network-induced delays, and load variations."
+group: selected-research
+order: 1
+role: "Master's Researcher"
+period: "Dec. 2024–Apr. 2027"
+summary: "An HKF-HOFAPC framework for high-precision position control of PMSM robotic joint modules under random feedback noise, network-induced delays, and load-torque variations."
 keywords:
   - PMSM
   - Robotic Joint Servo
-  - Predictive Control
-  - State Estimation
+  - HKF-HOFAPC
+  - Networked Control
   - TI C2000 F28379D
-period: "Current Research"
 ---
 
-This research focuses on predictive control and state estimation for PMSM-based robotic joint servo systems under measurement noise, network-induced delays, and load variations.
+This research uses the TI C2000 F28379D to build a dual-motor PMSM position-servo testbed for networked robotic joint modules. The experimental work covers equivalent drive-motor/load-motor mechanical modeling, identification of inertia, viscous damping, and torque constants, and an SVPWM-based FOC current-control system with current sampling, encoder feedback, coordinate transformations, and closed-loop signal processing.
 
-The work includes motor–load dynamic modeling, parameter identification, and FOC-based servo-control implementation on the TI C2000 F28379D platform. It also includes an integrated state-estimation and predictive-control framework for random noise, communication delays, and load disturbances.
+The PMSM position dynamics are formulated as a discrete second-order high-order fully actuated model. The resulting HKF-HOFAPC framework combines a locally stabilizing HOFA controller, a HOFA Kalman filter (HKF), and a high-order fully actuated predictive controller (HOFAPC). The HKF fuses model-predicted position with network-transmitted feedback, while a Diophantine-equation-based multistep prediction model compensates for network delay and load variation.
+
+Hardware comparisons were conducted under random noise, network delays of 1–10 ms, and a 0.05 N·m load disturbance. Compared with HOFAPC and KF-HOFAPC, the proposed method further reduced tracking error and overshoot while retaining rapid recovery from load disturbances.

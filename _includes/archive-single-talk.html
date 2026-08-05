@@ -1,42 +1,45 @@
 {% include base_path %}
 
-{% if post.header.teaser %}
-  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
-{% else %}
-  {% assign teaser = site.teaser %}
-{% endif %}
+{% assign talk_type = post.type | default: post.talk_type %}
 
-{% if post.id %}
-  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
-{% else %}
-  {% assign title = post.title %}
-{% endif %}
-
-<div class="{{ include.type | default: "list" }}__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    {% if include.type == "grid" and teaser %}
-      <div class="archive__item-teaser">
-        <img src=
-          {% if teaser contains "://" %}
-            "{{ teaser }}"
-          {% else %}
-            "{{ teaser | prepend: "/images/" | prepend: base_path }}"
-          {% endif %}
-          alt="">
-      </div>
-    {% endif %}
-    <h2 class="archive__item-title" itemprop="headline">
-      {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      {% else %}
-        <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+<li class="talk-list__item">
+  <article class="talk-entry" itemscope itemtype="https://schema.org/Event">
+    <header class="talk-entry__header">
+      {% if talk_type %}
+        <p class="talk-entry__type">{{ talk_type | escape }}</p>
       {% endif %}
-    </h2>
-    {% if post.read_time %}
-      <p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
+      <h2 class="talk-entry__title" itemprop="name">
+        <a href="{{ base_path }}{{ post.url }}" itemprop="url" rel="bookmark">{{ post.title | escape }}</a>
+      </h2>
+    </header>
+
+    <dl class="talk-entry__meta">
+      {% if post.date %}
+        <div class="talk-entry__meta-item talk-entry__date">
+          <dt>Date</dt>
+          <dd>
+            <time datetime="{{ post.date | date: '%Y-%m-%d' }}" itemprop="startDate">{{ post.date | date: '%B %-d, %Y' }}</time>{% if post.end_date %}<span aria-hidden="true"> &ndash; </span><span class="sr-only"> through </span><time datetime="{{ post.end_date | date: '%Y-%m-%d' }}" itemprop="endDate">{{ post.end_date | date: '%B %-d, %Y' }}</time>{% endif %}
+          </dd>
+        </div>
+      {% endif %}
+      {% if post.venue %}
+        <div class="talk-entry__meta-item talk-entry__venue">
+          <dt>Event</dt>
+          <dd>
+            {{ post.venue | escape }}{% if post.venue_original %}<span class="talk-entry__venue-original" lang="zh-CN">（{{ post.venue_original | escape }}）</span>{% endif %}
+          </dd>
+        </div>
+      {% endif %}
+      {% if post.location %}
+        <div class="talk-entry__meta-item talk-entry__location">
+          <dt>Location</dt>
+          <dd itemprop="location">{{ post.location | escape }}</dd>
+        </div>
+      {% endif %}
+    </dl>
+
+    {% if post.excerpt %}
+      <div class="talk-entry__excerpt" itemprop="description">{{ post.excerpt | markdownify }}</div>
     {% endif %}
-    {% if post.date %}<p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {{ post.date | date: '%B %d, %Y' }}</p>{% endif %}
-    {% if post.venue %}<p class="archive__item-excerpt" itemprop="description">{{post.type}}, {{ post.venue }},  {{post.location}} {% endif %}
-    {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify }}</p>{% endif %}
   </article>
-</div>
+</li>
