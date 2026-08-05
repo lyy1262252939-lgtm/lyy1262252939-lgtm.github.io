@@ -6,9 +6,9 @@ category: manuscripts
 permalink: /publication/hofa-estimation-predictive-control-pmsm/
 venue: "IEEE Transactions on Industrial Electronics"
 status: "Submitted"
-authors: "Li Qiu, Yiyang Liu, Yiting Ma, et al."
+authors: "Li Qiu, Yiyang Liu, Yiting Ma, Xiaofei Yan, Chenmei Song, and Feiqi Deng"
 ---
 
-**Authors:** Li Qiu, **Yiyang Liu**, Yiting Ma, et al.
+**Authors:** Li Qiu, **Yiyang Liu**, Yiting Ma, Xiaofei Yan, Chenmei Song, and Feiqi Deng
 
 **Status:** Submitted to *IEEE Transactions on Industrial Electronics*
