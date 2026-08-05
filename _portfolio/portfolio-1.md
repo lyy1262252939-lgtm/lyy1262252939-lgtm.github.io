@@ -1,7 +1,16 @@
 ---
-title: "Portfolio item number 1"
-excerpt: "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+title: "High-Precision PMSM Robotic Joint Servo Control"
 collection: portfolio
+summary: "Predictive control and state estimation for PMSM-based robotic joint servo systems under measurement noise, network-induced delays, and load variations."
+keywords:
+  - PMSM
+  - Robotic Joint Servo
+  - Predictive Control
+  - State Estimation
+  - TI C2000 F28379D
+period: "Current Research"
 ---
 
-This is an item in your portfolio. It can be have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML. 
+This research focuses on predictive control and state estimation for PMSM-based robotic joint servo systems under measurement noise, network-induced delays, and load variations.
+
+The work includes motor–load dynamic modeling, parameter identification, and FOC-based servo-control implementation on the TI C2000 F28379D platform. It also includes an integrated state-estimation and predictive-control framework for random noise, communication delays, and load disturbances.

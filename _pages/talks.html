@@ -1,16 +1,19 @@
 ---
 layout: archive
-title: "Talks and presentations"
+title: "Talks"
 permalink: /talks/
 author_profile: true
+nav_section: talks
 ---
 
-{% if site.talkmap_link == true %}
-
-<p style="text-decoration:underline;"><a href="/talkmap.html">See a map of all the places I've given a talk!</a></p>
-
+{% assign visible_talks = site.talks | where_exp: "talk", "talk.published != false" %}
+{% if visible_talks.size > 0 %}
+  {% for post in visible_talks reversed %}
+    {% include archive-single-talk.html %}
+  {% endfor %}
+{% else %}
+  <section class="empty-state" aria-labelledby="talks-empty-title">
+    <h2 id="talks-empty-title">Talks and presentations</h2>
+    <p>A verified list of talks and presentations is not available on this site yet. New entries will be added here when complete details are available.</p>
+  </section>
 {% endif %}
-
-{% for post in site.talks reversed %}
-  {% include archive-single-talk.html %}
-{% endfor %}

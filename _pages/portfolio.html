@@ -1,14 +1,41 @@
 ---
 layout: archive
-title: "Portfolio"
+title: "Research"
 permalink: /portfolio/
 author_profile: true
+nav_section: research
 ---
 
-{% include base_path %}
+<section class="profile-intro" aria-labelledby="research-intro-title">
+  <p class="profile-intro__eyebrow">Selected research</p>
+  <h2 id="research-intro-title">Control, estimation, and autonomous systems</h2>
+  <p class="profile-intro__lead">My work spans high-precision robotic joint servo systems, predictive motor control, and autonomous aerial vehicles. The projects below are limited to research described in this site’s verified profile.</p>
+</section>
 
-
-{% for post in site.portfolio %}
-  {% include archive-single.html %}
-{% endfor %}
+{% assign research_projects = site.portfolio | where_exp: "project", "project.published != false" %}
+{% if research_projects.size > 0 %}
+  <div class="research-grid">
+    {% for project in research_projects %}
+      <article class="research-card">
+        {% if project.period %}
+          <p class="research-card__meta">{{ project.period | escape }}</p>
+        {% endif %}
+        <h2>{{ project.title | escape }}</h2>
+        <p>{{ project.summary | escape }}</p>
+        {% if project.keywords and project.keywords.size > 0 %}
+          <ul class="research-card__keywords" aria-label="Keywords for {{ project.title | escape }}">
+            {% for keyword in project.keywords %}
+              <li>{{ keyword | escape }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <section class="empty-state" aria-labelledby="research-empty-title">
+    <h2 id="research-empty-title">Research projects</h2>
+    <p>Verified project details will be added here when available.</p>
+  </section>
+{% endif %}
 

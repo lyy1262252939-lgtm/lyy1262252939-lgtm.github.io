@@ -1,55 +1,76 @@
 ---
 permalink: /
-title: "About Me"
+title: "Yiyang Liu"
 author_profile: true
+nav_section: about
 redirect_from:
   - /about/
   - /about.html
 ---
 
-Welcome to my academic homepage!
+<section class="profile-intro" aria-labelledby="profile-intro-title">
+  <p class="profile-intro__eyebrow">M.Eng. Student · Control Science and Engineering</p>
+  <h2 id="profile-intro-title">High-precision control for robotic and autonomous systems</h2>
+  <p class="profile-intro__lead">My research centers on high-precision robotic servo control, predictive control, and state estimation, with particular interests in motor drives, learning-enhanced control, and active vibration suppression.</p>
+  <p>I am an M.Eng. student at <strong>Shenzhen University</strong>, supervised by <strong>Prof. Li Qiu</strong>. I received my B.Eng. in Electrical Engineering and Intelligent Control from Dongguan University of Technology. At Shenzhen University, I have a GPA of <strong>3.56/4.00</strong> and rank <strong>1st among 21 students</strong> in my program.</p>
 
-I am currently an M.Eng. student in Control Science and Engineering at Shenzhen University, supervised by Prof. Li Qiu. I received my B.Eng. degree in Electrical Engineering and Intelligent Control from Dongguan University of Technology. At Shenzhen University, I have a GPA of 3.56/4.00 and rank 1st among 21 students in my program.
+  <ul class="research-tags" aria-label="Core research areas">
+    <li>Robotic Servo Control</li>
+    <li>Predictive Control</li>
+    <li>State Estimation</li>
+    <li>Motor Drives</li>
+  </ul>
 
-My research interests lie in **high-precision robotic servo control, predictive control, and state estimation**, with particular emphasis on robotic joint servo systems, motor-drive control, learning-enhanced control, and active vibration suppression.
-
-My current research focuses on predictive control and state estimation for PMSM-based robotic joint servo systems under measurement noise, network-induced delays, and load variations. I have developed motor–load dynamic models, conducted parameter identification, and implemented FOC-based servo control systems on the TI C2000 F28379D platform. I am also interested in high-order fully actuated system theory and its applications to motor drives, networked control systems, and autonomous aerial vehicles.
-
-In addition, I have participated in the development of an autonomous quadrotor UAV platform integrating perception, planning, and control. The platform combines PX4, ROS, MAVROS, RflySim, EGO-Planner, depth cameras, and LiDAR to support autonomous takeoff, target traversal, obstacle avoidance, and vision-guided landing.
+  <div class="profile-actions" aria-label="Academic profile links">
+    <a class="btn btn--primary" href="https://scholar.google.com/citations?user=MZWddTgAAAAJ">Google Scholar</a>
+    <a class="btn btn--inverse" href="{{ '/cv/' | relative_url }}">View CV</a>
+    <a class="btn btn--inverse" href="mailto:2400092016@mails.szu.edu.cn">Email</a>
+  </div>
+</section>
 
 ## Research Interests
 
-- High-Precision Robotic Joint Servo Control
-- Predictive Control and Model Predictive Control
-- State Estimation and Observer Design
-- PMSM Drives and Motor Control
-- High-Order Fully Actuated System Theory
-- Learning-Enhanced Control
-- Active Vibration Suppression
-- Autonomous UAV Control
+<div class="interest-grid">
+  <article class="interest-card">
+    <h3>Robotic Servo Systems</h3>
+    <p>High-precision robotic joint servo control, PMSM drives, motor control, parameter identification, and embedded FOC implementation.</p>
+  </article>
+  <article class="interest-card">
+    <h3>Predictive Control</h3>
+    <p>Predictive and model predictive control, high-order fully actuated system theory, and applications to motor drives and networked systems.</p>
+  </article>
+  <article class="interest-card">
+    <h3>Estimation and Robust Performance</h3>
+    <p>State estimation and observer design for measurement noise, network-induced delays, and load variations, together with learning-enhanced control and active vibration suppression.</p>
+  </article>
+  <article class="interest-card">
+    <h3>Autonomous Aerial Vehicles</h3>
+    <p>Quadrotor control and platforms that integrate perception, planning, and control for autonomous flight.</p>
+  </article>
+</div>
 
 ## Selected Research Highlights
 
-- Developed an integrated state-estimation and predictive-control framework for networked PMSM servo systems under random noise, communication delays, and load disturbances.
-- Conducted embedded implementation, parameter identification, and experimental validation on the TI C2000 F28379D platform.
-- Developed predictive observer-compensated high-order fully actuated control methods for linear switched reluctance machines.
-- Participated in the development of an online-optimized predictive attitude-control framework for quadrotor UAVs.
-- Published research in the *International Journal of Systems Science* and *Aerospace Science and Technology*, with additional work submitted to *IEEE Transactions on Industrial Electronics*.
-- Received the National First Prize in the simulation track and the National Third Prize in the real-system track of the 2025 CICC Embodied Intelligence Algorithm Challenge.
+<ul class="highlight-list">
+  <li>Developed an integrated state-estimation and predictive-control framework for networked PMSM servo systems under random noise, communication delays, and load disturbances.</li>
+  <li>Conducted motor–load modeling, parameter identification, embedded implementation, and experimental validation on the TI C2000 F28379D platform.</li>
+  <li>Developed predictive observer-compensated high-order fully actuated control methods for linear switched reluctance machines.</li>
+  <li>Participated in the development of an online-optimized predictive attitude-control framework and an autonomous quadrotor platform using PX4, ROS, MAVROS, RflySim, EGO-Planner, depth cameras, and LiDAR.</li>
+  <li>Published research in the <em>International Journal of Systems Science</em> and <em>Aerospace Science and Technology</em>, with additional work submitted to <em>IEEE Transactions on Industrial Electronics</em>.</li>
+  <li>Received the National First Prize in the simulation track and the National Third Prize in the real-system track of the 2025 CICC Embodied Intelligence Algorithm Challenge.</li>
+</ul>
 
 ## Education
 
-**Shenzhen University**  
-M.Eng. in Control Science and Engineering  
-Sep. 2024 – Present  
-GPA: 3.56/4.00, Rank: 1/21
-
-**Dongguan University of Technology**  
-B.Eng. in Electrical Engineering and Intelligent Control  
-Sep. 2018 – Jun. 2022
-
-## Contact
-
-- Email: [2400092016@mails.szu.edu.cn](mailto:2400092016@mails.szu.edu.cn)
-- Google Scholar: [Yiyang Liu](https://scholar.google.com/citations?user=MZWddTgAAAAJ)
-- GitHub: [lyy1262252939-lgtm](https://github.com/lyy1262252939-lgtm)
+<div class="education-list">
+  <article class="education-item">
+    <h3>Shenzhen University</h3>
+    <p><strong>M.Eng. in Control Science and Engineering</strong></p>
+    <p>Sep. 2024 – Present · GPA: 3.56/4.00 · Rank: 1/21</p>
+  </article>
+  <article class="education-item">
+    <h3>Dongguan University of Technology</h3>
+    <p><strong>B.Eng. in Electrical Engineering and Intelligent Control</strong></p>
+    <p>Sep. 2018 – Jun. 2022</p>
+  </article>
+</div>

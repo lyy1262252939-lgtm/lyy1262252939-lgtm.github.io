@@ -1,0 +1,44 @@
+{% include base_path %}
+{% assign publication = include.post %}
+{% assign publication_title = publication.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% assign author_name = site.author.name | escape %}
+{% capture highlighted_author %}<strong class="author-self">{{ author_name }}</strong>{% endcapture %}
+
+<article class="publication-entry" itemscope itemtype="https://schema.org/ScholarlyArticle">
+  <h3 class="publication-entry__title" itemprop="headline">
+    <a href="{{ base_path }}{{ publication.url }}">{{ publication_title }}</a>
+  </h3>
+
+  {% if publication.authors %}
+    <p class="publication-entry__authors" itemprop="author">
+      {{ publication.authors | escape | replace: author_name, highlighted_author }}
+    </p>
+  {% elsif publication.citation %}
+    <p class="publication-entry__authors">
+      {{ publication.citation | replace: site.author.name, highlighted_author }}
+    </p>
+  {% endif %}
+
+  {% if publication.venue or publication.date %}
+    <p class="publication-entry__venue">
+      {% if publication.venue %}<em>{{ publication.venue }}</em>{% endif %}
+      {% if publication.venue and publication.date %}<span aria-hidden="true"> · </span>{% endif %}
+      {% if publication.date %}<time datetime="{{ publication.date | date_to_xmlschema }}">{{ publication.date | date: "%Y" }}</time>{% endif %}
+    </p>
+  {% endif %}
+
+  {% if publication.excerpt %}
+    <div class="publication-entry__excerpt" itemprop="description">
+      {{ publication.excerpt | markdownify }}
+    </div>
+  {% endif %}
+
+  {% if publication.paperurl or publication.slidesurl or publication.bibtexurl or publication.link %}
+    <div class="publication-entry__actions" aria-label="Links for {{ publication.title | escape }}">
+      {% if publication.paperurl %}<a class="btn btn--small btn--outline" href="{{ publication.paperurl }}">Paper</a>{% endif %}
+      {% if publication.slidesurl %}<a class="btn btn--small btn--outline" href="{{ publication.slidesurl }}">Slides</a>{% endif %}
+      {% if publication.bibtexurl %}<a class="btn btn--small btn--outline" href="{{ publication.bibtexurl }}">BibTeX</a>{% endif %}
+      {% if publication.link %}<a class="btn btn--small btn--outline" href="{{ publication.link }}">Direct link</a>{% endif %}
+    </div>
+  {% endif %}
+</article>

@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
-title                    : "Yiyang Liu / Personal Homepage"
+title                    : "Yiyang Liu"
 title_separator          : "-"
 name                     : &name "Yiyang Liu"
 description              : &description "Academic homepage of Yiyang Liu, focusing on robotic joint servo control, predictive control, and state estimation."   # Update this with a general description of your site, this is the default if not overridden by a page
@@ -26,7 +26,7 @@ author:
   avatar           : "profile_YiayangLiu.png"
   name             : "Yiyang Liu"
   pronouns         : # example: "she/her"  
-  bio              : "M.Eng. student specializing in robotic servo control, predictive control, and state estimation."
+  bio              : "M.Eng. student in Control Science and Engineering at Shenzhen University."
   location         : "Shenzhen, China"
   employer         : "Shenzhen University"
   uri              :
@@ -84,12 +84,12 @@ author:
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
-  books:
-    title: 'Books'
-  manuscripts:
-    title: 'Journal Articles'    
+  journals:
+    title: 'Journal Articles'
   conferences:
     title: 'Conference Papers'
+  manuscripts:
+    title: 'Manuscripts'
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/ for social media previews
@@ -190,6 +190,11 @@ exclude:
   - package.json*
   - Rakefile
   - README
+  # Preserve the generated talk-map sources without publishing their demo data.
+  - talkmap
+  - talkmap.ipynb
+  - talkmap_out.ipynb
+  - talkmap.py
   - tmp
   - vendor
 keep_files:
@@ -271,6 +276,7 @@ defaults:
     values:
       layout: single
       author_profile: true
+      nav_section: publications
       share: true
       comments: true
   # _portfolio
@@ -280,6 +286,7 @@ defaults:
     values:
       layout: single
       author_profile: true
+      nav_section: research
       share: true
       comment: true
   # _talks
@@ -289,6 +296,7 @@ defaults:
     values:
       layout: talk
       author_profile: true
+      nav_section: talks
       share: true
 
 
