@@ -59,6 +59,9 @@ nav_section: research
                   {% endfor %}
                 </ul>
               {% endif %}
+              <a class="research-card__link" href="{{ project.url | relative_url }}">
+                View project details <span aria-hidden="true">&rarr;</span>
+              </a>
             </article>
           {% endfor %}
         </div>

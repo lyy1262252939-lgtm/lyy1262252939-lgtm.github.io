@@ -923,6 +923,181 @@ button#theme-toggle:hover {
   font-size: 0.72rem;
 }
 
+.research-card__link {
+  display: -webkit-inline-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.05rem;
+  color: var(--academic-link);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.research-card__link:hover,
+.research-card__link:active {
+  color: var(--academic-link-hover);
+  text-decoration: underline;
+}
+
+.research-card__link span {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Research and activity photography -------------------------------------- */
+
+.project-media {
+  margin: 1.5rem 0 2.5rem;
+}
+
+.project-media__link,
+.project-gallery__media {
+  display: block;
+  overflow: hidden;
+  background: var(--academic-surface-muted);
+  border: 1px solid var(--academic-border);
+  border-radius: 8px;
+}
+
+.project-media__link:hover,
+.project-gallery__media:hover {
+  border-color: var(--academic-link);
+}
+
+.project-media img,
+.project-gallery img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.project-media img {
+  height: auto;
+}
+
+.project-media--cinematic .project-media__link {
+  aspect-ratio: 16 / 9;
+}
+
+.project-media--cinematic img {
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+.project-media figcaption,
+.project-gallery figcaption {
+  color: var(--academic-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.project-media figcaption {
+  margin-top: 0.65rem;
+}
+
+.project-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin: 1.25rem 0 2.5rem;
+}
+
+.project-gallery__item {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  background: var(--academic-surface);
+  border: 1px solid var(--academic-border);
+  border-radius: 8px;
+}
+
+.project-gallery__media {
+  border: 0;
+  border-bottom: 1px solid var(--academic-border);
+  border-radius: 0;
+}
+
+.project-gallery__media:hover {
+  border-color: var(--academic-border);
+}
+
+.project-gallery__item--portrait .project-gallery__media,
+.project-gallery__item--poster .project-gallery__media {
+  aspect-ratio: 3 / 4;
+}
+
+.project-gallery__item--landscape .project-gallery__media,
+.project-gallery__item--award .project-gallery__media {
+  aspect-ratio: 4 / 3;
+}
+
+.project-gallery__item--flight .project-gallery__media {
+  aspect-ratio: 3 / 2;
+}
+
+.project-gallery__item--portrait img,
+.project-gallery__item--poster img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.project-gallery__item--landscape img,
+.project-gallery__item--flight img,
+.project-gallery__item--award img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-gallery figcaption {
+  flex: 1 1 auto;
+  margin: 0;
+  padding: 0.72rem 0.85rem 0.8rem;
+}
+
+@media screen and (min-width: 600px) {
+  .project-gallery--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .project-gallery--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .project-gallery--event {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-areas:
+      "poster flight"
+      "poster award";
+    align-items: stretch;
+  }
+
+  .project-gallery--event .project-gallery__item--poster {
+    grid-area: poster;
+  }
+
+  .project-gallery--event .project-gallery__item--flight {
+    grid-area: flight;
+  }
+
+  .project-gallery--event .project-gallery__item--award {
+    grid-area: award;
+  }
+
+  .project-gallery--event .project-gallery__item--poster .project-gallery__media {
+    flex: 1 1 auto;
+  }
+}
+
 /* Publication list ------------------------------------------------------- */
 
 .publication-intro {
