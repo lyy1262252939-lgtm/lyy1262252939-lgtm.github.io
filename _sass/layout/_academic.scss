@@ -977,6 +977,26 @@ button#theme-toggle:hover {
   height: auto;
 }
 
+.project-video__player {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  background: #050505;
+  border: 1px solid var(--academic-border);
+  border-radius: 8px;
+}
+
+.project-video__player:focus-visible {
+  outline: 3px solid var(--academic-link);
+  outline-offset: 3px;
+}
+
+.project-video__fallback {
+  margin: 0;
+  padding: 1rem;
+}
+
 .project-media--cinematic .project-media__link {
   aspect-ratio: 16 / 9;
 }

@@ -16,6 +16,16 @@ keywords:
 
 This project integrates perception, mission planning, motion control, and software-in-the-loop validation using PX4, ROS, MAVROS, RflySim, and EGO-Planner. A RealSense D435 depth camera and Livox MID-360 LiDAR provide depth sensing, target localization, environmental perception, and obstacle detection. The autonomous task workflow combines vision-language-model task understanding, local path planning, and a task state machine to support autonomous takeoff, target traversal, dynamic obstacle avoidance, and vision-guided landing.
 
+## Autonomous mission demonstration
+
+<figure class="project-media project-video">
+  <video class="project-video__player" width="1156" height="720" controls preload="metadata" playsinline poster="{{ '/images/research/uav/autonomous-mission-demo-poster.jpg' | relative_url }}" aria-label="ROS and RViz autonomous UAV mission demonstration">
+    <source src="{{ '/videos/research/uav/autonomous-mission-demonstration.mp4' | relative_url }}" type="video/mp4">
+    <p class="project-video__fallback">Your browser does not support embedded video. <a href="{{ '/videos/research/uav/autonomous-mission-demonstration.mp4' | relative_url }}">Download the UAV mission demonstration</a>.</p>
+  </video>
+  <figcaption>ROS/RViz demonstration of environment mapping, mission dispatch, gate and target recognition, and vision-guided landing-marker detection.</figcaption>
+</figure>
+
 ## Platform and flight validation
 
 <figure class="project-media">
