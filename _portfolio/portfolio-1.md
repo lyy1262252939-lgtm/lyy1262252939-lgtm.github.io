@@ -16,6 +16,22 @@ keywords:
 
 This research uses the TI C2000 F28379D to build a dual-motor PMSM position-servo testbed for networked robotic joint modules. The experimental work covers equivalent drive-motor/load-motor mechanical modeling, identification of inertia, viscous damping, and torque constants, and an SVPWM-based FOC current-control system with current sampling, encoder feedback, coordinate transformations, and closed-loop signal processing.
 
+## Dual-motor experimental testbed
+
+<figure class="project-media">
+  <a class="project-media__link" href="{{ '/images/research/pmsm/dual-motor-rigid-coupling-schematic.png' | relative_url }}" aria-label="Open the full-size dual-motor testbed schematic">
+    <img src="{{ '/images/research/pmsm/dual-motor-rigid-coupling-schematic.png' | relative_url }}" width="6033" height="3416" alt="Line drawing of two permanent-magnet synchronous motors connected by a rigid coupling on an aluminum test base" loading="lazy" decoding="async">
+  </a>
+  <figcaption>Mechanical layout of the rigidly coupled dual-PMSM plant, with Motor 1 acting as the drive motor and Motor 2 providing the programmable load torque.</figcaption>
+</figure>
+
+<figure class="project-media">
+  <a class="project-media__link" href="{{ '/images/research/pmsm/dual-motor-experimental-platform.png' | relative_url }}" aria-label="Open the full-size annotated PMSM experimental platform image">
+    <img src="{{ '/images/research/pmsm/dual-motor-experimental-platform.png' | relative_url }}" width="2031" height="1231" alt="Annotated dual-motor PMSM test platform showing MATLAB Simulink, motor drives, magnetic encoder, rigid coupling, power supply, and drive and load motors" loading="lazy" decoding="async">
+  </a>
+  <figcaption>Annotated hardware-in-the-loop platform used for controller implementation, encoder-based feedback, and drive-motor/load-motor experiments.</figcaption>
+</figure>
+
 <figure class="project-media">
   <a class="project-media__link" href="{{ '/images/research/pmsm/f28379d-dual-motor-testbench.png' | relative_url }}" aria-label="Open the full-size PMSM experiment image">
     <img src="{{ '/images/research/pmsm/f28379d-dual-motor-testbench.png' | relative_url }}" width="1920" height="1080" alt="MATLAB Simulink motor-control experiment with a measured speed response and dual-motor test bench" decoding="async">
