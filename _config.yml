@@ -186,6 +186,7 @@ exclude:
   - CHANGELOG
   - Capfile
   - config
+  - docker-compose.yaml
   - Dockerfile
   - Gemfile
   - Gruntfile.js
@@ -193,10 +194,13 @@ exclude:
   - LICENSE
   - local
   - log
+  - markdown_generator
   - node_modules
+  - package-lock.json
   - package.json*
   - Rakefile
   - README
+  - scripts
   # Preserve the generated talk-map sources without publishing their demo data.
   - talkmap
   - talkmap.ipynb
