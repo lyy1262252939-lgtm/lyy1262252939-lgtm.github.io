@@ -1,16 +1,23 @@
 ---
 layout: archive
-title: "Talks and presentations"
+title: "Talks & Academic Activities"
 permalink: /talks/
 author_profile: true
+nav_section: talks
 ---
 
-{% if site.talkmap_link == true %}
+<p class="page__lead">Selected conference presentations and academic activities, listed from newest to oldest.</p>
 
-<p style="text-decoration:underline;"><a href="/talkmap.html">See a map of all the places I've given a talk!</a></p>
-
+{% assign visible_talks = site.talks | where_exp: "talk", "talk.published != false" | sort: "date" | reverse %}
+{% if visible_talks.size > 0 %}
+  <ol class="talk-list" aria-label="Conference presentations and academic activities">
+    {% for post in visible_talks %}
+      {% include archive-single-talk.html %}
+    {% endfor %}
+  </ol>
+{% else %}
+  <section class="empty-state" aria-labelledby="talks-empty-title">
+    <h2 id="talks-empty-title">Talks and presentations</h2>
+    <p>A verified list of talks and presentations is not available on this site yet. New entries will be added here when complete details are available.</p>
+  </section>
 {% endif %}
-
-{% for post in site.talks reversed %}
-  {% include archive-single-talk.html %}
-{% endfor %}

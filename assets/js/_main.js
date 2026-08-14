@@ -25,19 +25,32 @@ function determineComputedTheme() {
   return browserPref ? "dark" : "light";
 }
 
+// Keep the theme control's accessible state in sync with the rendered theme.
+function updateThemeToggle(theme) {
+  const isDark = theme === "dark";
+  $("#theme-toggle")
+    .attr("aria-pressed", isDark ? "true" : "false")
+    .attr("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+}
+
 // Set the theme on page load or when explicitly called
 function setTheme(theme) {
-  const use_theme = theme ||
+  let use_theme = theme ||
     localStorage.getItem("theme") ||
-    $("html").attr("data-theme") ||
-    browserPref;
+    $("html").attr("data-theme");
+
+  if (use_theme !== "dark" && use_theme !== "light") {
+    use_theme = browserPref ? "dark" : "light";
+  }
 
   if (use_theme === "dark") {
     $("html").attr("data-theme", "dark");
     $("#theme-icon").removeClass("fa-sun").addClass("fa-moon");
+    updateThemeToggle("dark");
   } else if (use_theme === "light") {
     $("html").removeAttr("data-theme");
     $("#theme-icon").removeClass("fa-moon").addClass("fa-sun");
+    updateThemeToggle("light");
   }
 }
 
@@ -141,19 +154,26 @@ function redrawPlotly() {
 $(document).ready(function () {
   // SCSS SETTINGS - These should be the same as the settings in the relevant files
   const scssLarge = 925;          // pixels, from /_sass/_themes.scss
-  const scssMastheadHeight = 70;  // pixels, from the current theme (e.g., /_sass/theme/_default.scss)
 
   // If the user hasn't chosen a theme, follow the OS preference
   setTheme();
-  window.matchMedia('(prefers-color-scheme: dark)')
-        .addEventListener("change", (e) => {
-          if (!localStorage.getItem("theme")) {
-            setTheme(e.matches ? "dark" : "light");
-          }
-        });
+  const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  const handleColorSchemeChange = function (event) {
+    const themeSetting = localStorage.getItem("theme");
+    if (!themeSetting || themeSetting === "system") {
+      setTheme(event.matches ? "dark" : "light");
+    }
+  };
+  if (typeof colorSchemeQuery.addEventListener === "function") {
+    colorSchemeQuery.addEventListener("change", handleColorSchemeChange);
+  } else if (typeof colorSchemeQuery.addListener === "function") {
+    colorSchemeQuery.addListener(handleColorSchemeChange);
+  }
 
   // Enable the theme toggle
-  $('#theme-toggle').on('click', toggleTheme);
+  $('#theme-toggle').on('click', function () {
+    toggleTheme();
+  });
 
   // Enable the sticky footer
   var bumpIt = function () {
@@ -171,17 +191,60 @@ $(document).ready(function () {
   var didResize = false;
   bumpIt();
 
-  // Follow menu drop down
-  $(".author__urls-wrapper button").on("click", function () {
-    $(".author__urls").fadeToggle("fast", function () { });
-    $(".author__urls-wrapper button").toggleClass("open");
+  // Profile links drop-down on smaller viewports.
+  const $authorLinksToggle = $("#author-profile-links-toggle");
+  const $authorLinks = $("#author-profile-links");
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let authorLinksOpen = false;
+
+  const setAuthorLinks = function (open, returnFocus) {
+    authorLinksOpen = open;
+    $authorLinks.stop(true, true);
+    if (reduceMotion) {
+      $authorLinks.toggle(open);
+    } else if (open) {
+      $authorLinks.fadeIn("fast");
+    } else {
+      $authorLinks.fadeOut("fast");
+    }
+    $authorLinksToggle
+      .toggleClass("open", open)
+      .attr("aria-expanded", open ? "true" : "false")
+      .attr("aria-label", open ? "Hide profile links" : "Show profile links");
+    if (returnFocus) {
+      $authorLinksToggle.trigger("focus");
+    }
+  };
+
+  const syncAuthorLinks = function () {
+    if ($authorLinks.length === 0) {
+      return;
+    }
+    $authorLinks.stop(true, true);
+    if ($(window).width() >= scssLarge) {
+      $authorLinks.show();
+    } else {
+      $authorLinks.toggle(authorLinksOpen);
+    }
+  };
+
+  $authorLinksToggle.on("click", function () {
+    setAuthorLinks(!authorLinksOpen, false);
   });
 
-  // Restore the follow menu if toggled on a window resize
-  jQuery(window).on('resize', function () {
-    if ($('.author__urls.social-icons').css('display') == 'none' && $(window).width() >= scssLarge) {
-      $(".author__urls").css('display', 'block')
+  $authorLinks.on("click", "a", function () {
+    if ($(window).width() < scssLarge) {
+      setAuthorLinks(false, false);
     }
   });
+
+  $(document).on("keydown", function (event) {
+    if (event.key === "Escape" && authorLinksOpen && $(window).width() < scssLarge) {
+      setAuthorLinks(false, true);
+    }
+  });
+
+  jQuery(window).on("resize", syncAuthorLinks);
+  syncAuthorLinks();
 
 });

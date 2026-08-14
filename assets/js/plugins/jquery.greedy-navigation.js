@@ -6,12 +6,25 @@
 */
 
 var $nav = $('#site-nav');
-var $btn = $('#site-nav button');
+var $btn = $('#site-nav .greedy-nav__toggle');
 var $vlinks = $('#site-nav .visible-links');
 var $vlinks_persist_tail = $vlinks.children("*.persist.tail");
 var $hlinks = $('#site-nav .hidden-links');
 
 var breaks = [];
+
+function setNavMenuState(open, returnFocus) {
+  var shouldOpen = open && $hlinks.children().length > 0;
+  $hlinks.toggleClass('hidden', !shouldOpen).attr('aria-hidden', shouldOpen ? 'false' : 'true');
+  $btn
+    .toggleClass('close', shouldOpen)
+    .attr('aria-expanded', shouldOpen ? 'true' : 'false')
+    .attr('aria-label', shouldOpen ? 'Close navigation menu' : 'Open navigation menu');
+
+  if (returnFocus) {
+    $btn.trigger('focus');
+  }
+}
 
 function updateNav() {
 
@@ -27,10 +40,11 @@ function updateNav() {
       // Move item to the hidden list
       $vlinks.children("*:not(.persist)").last().prependTo($hlinks);
 
-      availableSpace = $btn.hasClass("hidden") ? $nav.width() : $nav.width() - $btn.width() - 30;
-
       // Show the dropdown btn
       $btn.removeClass("hidden");
+
+      // Account for the newly visible control before checking overflow again.
+      availableSpace = $nav.width() - $btn.width() - 30;
     }
 
     // The visible list is not overflowing
@@ -50,22 +64,16 @@ function updateNav() {
     // Hide the dropdown btn if hidden list is empty
     if (breaks.length < 1) {
       $btn.addClass('hidden');
-      $btn.removeClass('close');
-      $hlinks.addClass('hidden');
+      setNavMenuState(false, false);
     }
   }
 
   // Keep counter updated
   $btn.attr("count", breaks.length);
 
-  // update masthead height and the body/sidebar top padding
-  var mastheadHeight = $('.masthead').height();
-  $('body').css('padding-top', mastheadHeight + 'px');
-  if ($(".author__urls-wrapper button").is(":visible")) {
-    $(".sidebar").css("padding-top", "");
-  } else {
-    $(".sidebar").css("padding-top", mastheadHeight + "px");
-  }
+  // Expose the measured masthead height for responsive body/sidebar spacing.
+  var mastheadHeight = Math.ceil($('.masthead').outerHeight() || 0);
+  document.documentElement.style.setProperty('--masthead-height', mastheadHeight + 'px');
 
 }
 
@@ -74,13 +82,25 @@ function updateNav() {
 $(window).on('resize', function () {
   updateNav();
 });
-screen.orientation.addEventListener("change", function () {
-  updateNav();
-});
+if (window.screen && window.screen.orientation && typeof window.screen.orientation.addEventListener === 'function') {
+  window.screen.orientation.addEventListener('change', updateNav);
+} else if ('onorientationchange' in window) {
+  window.addEventListener('orientationchange', updateNav);
+}
 
 $btn.on('click', function () {
-  $hlinks.toggleClass('hidden');
-  $(this).toggleClass('close');
+  setNavMenuState($(this).attr('aria-expanded') !== 'true', false);
 });
 
+$hlinks.on('click', 'a', function () {
+  setNavMenuState(false, false);
+});
+
+$(document).on('keydown', function (event) {
+  if (event.key === 'Escape' && $btn.attr('aria-expanded') === 'true') {
+    setNavMenuState(false, true);
+  }
+});
+
+setNavMenuState(false, false);
 updateNav();

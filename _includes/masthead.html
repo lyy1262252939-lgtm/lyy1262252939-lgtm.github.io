@@ -1,12 +1,28 @@
 {% include base_path %}
+
+{% assign current_section = page.nav_section %}
+{% unless current_section %}
+  {% if page.url == '/' or page.url == '/index.html' %}
+    {% assign current_section = 'about' %}
+  {% elsif page.collection == 'publications' %}
+    {% assign current_section = 'publications' %}
+  {% elsif page.collection == 'portfolio' %}
+    {% assign current_section = 'research' %}
+  {% elsif page.collection == 'talks' %}
+    {% assign current_section = 'talks' %}
+  {% endif %}
+{% endunless %}
+
 <div class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
-      <nav id="site-nav" class="greedy-nav">
-        <button><span class="navicon"></span></button>
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        <button class="greedy-nav__toggle" type="button" aria-label="Open navigation menu" aria-controls="site-nav-hidden-links" aria-expanded="false">
+          <span class="navicon" aria-hidden="true"></span>
+        </button>
         <ul class="visible-links">
-          <li class="masthead__menu-item masthead__menu-item--lg persist {% if page.url == '/' or page.url == '/index.html' %}selected{% endif %}">
-            <a href="{{ base_path }}/">{{ site.title }}</a>
+          <li class="masthead__menu-item masthead__menu-item--lg persist">
+            <a href="{{ base_path }}/">{{ site.name }}</a>
           </li>
           {% for link in site.data.navigation.main %}
             {% if link.url contains 'http' %}
@@ -14,15 +30,27 @@
             {% else %}
               {% assign domain = base_path %}
             {% endif %}
-            <li class="masthead__menu-item {% if page.url contains link.url and link.url != '/' %}selected{% endif %}">
-              <a href="{{ domain }}{{ link.url }}">{{ link.title }}</a>
+            {% assign link_is_current = false %}
+            {% if link.section and current_section == link.section %}
+              {% assign link_is_current = true %}
+            {% elsif current_section == nil or current_section == empty %}
+              {% if page.url == link.url %}
+                {% assign link_is_current = true %}
+              {% elsif link.url != '/' and page.url contains link.url %}
+                {% assign link_is_current = true %}
+              {% endif %}
+            {% endif %}
+            <li class="masthead__menu-item{% if link_is_current %} selected{% endif %}">
+              <a href="{{ domain }}{{ link.url }}"{% if link_is_current %} aria-current="page"{% endif %}>{{ link.title }}</a>
             </li>
           {% endfor %}
-          <li id="theme-toggle" class="masthead__menu-item persist tail">
-            <a role="button" aria-labelledby="theme-icon"><i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true" title="toggle theme"></i></a>
+          <li class="masthead__menu-item persist tail">
+            <button id="theme-toggle" class="theme-toggle__button" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+              <i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true"></i>
+            </button>
           </li>
         </ul>
-        <ul class="hidden-links hidden"></ul>
+        <ul id="site-nav-hidden-links" class="hidden-links hidden" aria-hidden="true"></ul>
       </nav>
     </div>
   </div>
